@@ -29,7 +29,6 @@ a:hover {
 
 .nav {
     display: flex;
-    flex-direction: row;
     max-width: 200px;
     justify-content: center;
     align-items: center;

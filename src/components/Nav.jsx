@@ -10,22 +10,27 @@ function Nav() {
 
     console.log(state.user)
 
-    return (
+    return !state.user.token ?
         <div className="nav">
-            <A className="nav_item" href="/">GAMES</A>
-            <br/>
-            {!state.user.token ?
-                <p>
-                    <A className="nav_item" href="/login">LOGIN</A>
-                    <br/>
-                    <A className="nav_item" href="/registration">REGISTRATION</A>
-                </p> :
-                <A className="nav_item" href="/">
-                    <div onClick={() => setState(signOutAC())}>SIGN OUT</div>
-                </A>
-            }
+            <div className="nav_item">
+                <A href="/">GAMES</A>
+            </div>
+            <div className="nav_item">
+                <A href="/login">LOGIN</A>
+            </div>
+            <div className="nav_item">
+                <A href="/registration">REGISTRATION</A>
+            </div>
         </div>
-    )
+        :
+        <div className="nav">
+            <div className="nav_item">
+                <A href="/">GAMES</A>
+            </div>
+            <div className="nav_item">
+                <A onClick={() => setState(signOutAC())} href="/">SIGN OUT</A>
+            </div>
+        </div>
 }
 
 export default Nav
