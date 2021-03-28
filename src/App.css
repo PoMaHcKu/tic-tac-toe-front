@@ -86,3 +86,24 @@ a:hover {
     font-size: 10px;
     min-height: 16px;
 }
+
+.game_content {
+    background-color: aquamarine;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 310px;
+    gap: 5px;
+    padding: 10px;
+}
+
+.game_field {
+    width: 90px;
+    height: 90px;
+    border: 5px solid white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

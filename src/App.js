@@ -2,12 +2,14 @@ import './App.css'
 import * as React from 'react'
 import {useRoutes} from "hookrouter";
 import Nav from "./components/Nav";
+import Game from "./components/Game";
 import Games from "./components/Games";
 import Login from "./components/auth/Login";
 import RegistrationForm from "./components/auth/RegistrationForm";
 
 const routes = {
     '/': () => <Games/>,
+    '/game': () => <Game/>,
     '/login': () => <Login/>,
     '/registration': () => <RegistrationForm/>
 }
