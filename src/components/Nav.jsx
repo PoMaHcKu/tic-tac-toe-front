@@ -3,10 +3,11 @@ import * as React from "react";
 import {useContext} from "react";
 import {Context} from "../reducers/store";
 import {signOutAC} from "../constants/actionCreators";
+import {setToken} from "../dao/request";
 
 function Nav() {
 
-    const [state, setState] = useContext(Context)
+    const [state, dispatch] = useContext(Context)
 
     console.log(state.user)
 
@@ -28,7 +29,10 @@ function Nav() {
                 <A href="/">GAMES</A>
             </div>
             <div className="nav_item">
-                <A onClick={() => setState(signOutAC())} href="/">SIGN OUT</A>
+                <A onClick={() => {
+                    setToken(null)
+                    dispatch(signOutAC())
+                }} href="/">SIGN OUT</A>
             </div>
         </div>
 }

@@ -7,3 +7,10 @@ const request = axios.create({
 )
 
 export default request
+export function setToken(token) {
+    if (token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer_${token}`
+    } else {
+        axios.defaults.headers.common['Authorization'] = null
+    }
+}

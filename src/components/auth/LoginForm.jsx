@@ -1,19 +1,29 @@
 import React, {useContext} from 'react'
-import {useForm} from "react-hook-form";
-import {login} from "../../dao/loginRequest";
-import {passwordRestriction, usernameRestriction} from "../../constants/formRestrictions";
-import {Context} from "../../reducers/store";
-import {setUserAC} from "../../constants/actionCreators";
+import {useForm} from "react-hook-form"
+import {login} from "../../dao/loginRequest"
+import {passwordRestriction, usernameRestriction} from "../../constants/formRestrictions"
+import {Context} from "../../reducers/store"
+import {setUserAC} from "../../constants/actionCreators"
+import {setToken} from "../../dao/request"
 
 function LoginForm() {
 
-    const {register, handleSubmit, formState, setError} = useForm({mode: "onChange"})
+    const {register, handleSubmit, formState, setError} = useForm(
+        {mode: "onChange"})
     const [state, dispatch] = useContext(Context)
     const onSubmit = data => login(data)
-        .then(resp => dispatch(setUserAC({...resp})))
+        .then(resp => {
+            setToken(resp.token)
+            dispatch(setUserAC({...resp}))
+        })
         .catch(err => {
-            setError("login", {message: err.response.data.message})
-            setError("password", {message: err.response.data.message})
+            if (err.response) {
+                setError("login", {message: err.response.data.message})
+                setError("password", {message: err.response.data.message})
+            } else {
+                setError("login", {message: 'It has broken, sorry'})
+                setError("password", {message: 'It has broken, sorry'})
+            }
         })
 
     return (
@@ -42,7 +52,7 @@ function LoginForm() {
                 <input className="form_field form_button" type="submit" value="Sign In"/>
             </div>
         </form>
-    );
+    )
 }
 
 export default LoginForm
